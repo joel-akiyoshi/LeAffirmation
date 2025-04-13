@@ -2,7 +2,6 @@ import src.microphone as microphone
 import src.vosk_interface as vosk_interface
 import src.sentiment as sentiment
 
-import random
 
 audio, stream = microphone.init_microphone()
 recognizer = vosk_interface.init_recognizer()
@@ -15,9 +14,11 @@ try:
 
         result = vosk_interface.transcribe_audio(recognizer, audio_data)
 
-        if result and random.randint(1, 2) == 1:
-            folder = sentiment.get_sentiment_folder(result)
-            print(f"result is '{result}', folder is {folder}")
+        if result:
+            print(f"You said {result}")
+            print(f"Sorted into folder {sentiment.get_sentiment_folder(result)}")
+
+
             
 
 except KeyboardInterrupt:
