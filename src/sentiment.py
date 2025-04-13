@@ -10,8 +10,8 @@ FOLDER_POSITIVE = "03"
 FOLDER_MEME = "04"
 
 # Meme mode keyword triggers
-MEME_MODE_KEYWORDS_ON = ["meme mode on", "turn on meme mode", "activate meme mode"]
-MEME_MODE_KEYWORDS_OFF = ["meme mode off", "turn off meme mode", "deactivate meme mode"]
+MEME_MODE_KEYWORDS_ON = ["meme mode on", "turn on meme mode", "activate meme mode", "silly mode activate"]
+MEME_MODE_KEYWORDS_OFF = ["meme mode off", "turn off meme mode", "deactivate meme mode", "silly mode deactivate"]
 
 # Meme mode state
 meme_mode_active = False

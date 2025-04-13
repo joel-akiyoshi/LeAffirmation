@@ -1,15 +1,8 @@
 import src.microphone as microphone
 import src.vosk_interface as vosk_interface
+import src.sentiment as sentiment
 
-import pyaudio
-
-p = pyaudio.PyAudio()
-for i in range(p.get_device_count()):
-    info = p.get_device_info_by_index(i)
-    print(f"{i}: {info['name']} (input channels: {info['maxInputChannels']})")
-    print(f"  Default sample rate: {info['defaultSampleRate']}")
-p.terminate()
-
+import random
 
 audio, stream = microphone.init_microphone()
 recognizer = vosk_interface.init_recognizer()
@@ -22,8 +15,10 @@ try:
 
         result = vosk_interface.transcribe_audio(recognizer, audio_data)
 
-        if result:
-            print("You said:", result)
+        if result and random.randint(1, 2) == 1:
+            folder = sentiment.get_sentiment_folder(result)
+            print(f"result is '{result}', folder is {folder}")
+            
 
 except KeyboardInterrupt:
     print("Stopping...")

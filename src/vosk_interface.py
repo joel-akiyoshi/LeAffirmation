@@ -1,4 +1,3 @@
-from vosk import Model, KaldiRecognizer
 
 import vosk
 import json
