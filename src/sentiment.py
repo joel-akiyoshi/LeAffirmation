@@ -8,47 +8,56 @@ FOLDER_NEGATIVE = 1
 FOLDER_NEUTRAL = 2
 FOLDER_POSITIVE = 3
 FOLDER_MEME = 4
+FOREVER_FOLDER = 5
+SHOW_AND_TELL_FOLDER = 6
 
-# Meme mode keyword triggers
-MEME_MODE_KEYWORDS_ON = ["meme mode on", "turn on meme mode", "activate meme mode", "silly mode activate"]
-MEME_MODE_KEYWORDS_OFF = ["meme mode off", "turn off meme mode", "deactivate meme mode", "silly mode deactivate"]
+MEME_MODE_KEYWORDS_ON = ["meme mode on", "turn on meme mode", "activate meme mode", "silly mode on"]
+MEME_MODE_KEYWORDS_OFF = ["meme mode off", "turn off meme mode", "deactivate meme mode", "silly mode off"]
 
-# Meme mode state
-meme_mode_active = False
+FOREVER_KW = "play forever"
+SHOW_AND_TELL_KW = "show and tell"
 
-def check_meme_mode(text):
+
+def meme_desired(text) -> bool:
     """
-    Checks if the text contains a command to activate or deactivate meme mode.
-    Returns a status string or None.
+    Check if meme mode should activate.
     """
-    global meme_mode_active
+
     lower_text = text.lower()
 
     for phrase in MEME_MODE_KEYWORDS_ON:
         if phrase in lower_text:
-            meme_mode_active = True
-            return "MEME_ON"
+            return True
 
     for phrase in MEME_MODE_KEYWORDS_OFF:
         if phrase in lower_text:
-            meme_mode_active = False
-            return "MEME_OFF"
+            return False
+        
 
-    return None
+def forever_desired(text) -> bool:
+    lower_text = text.lower()
+    return FOREVER_KW in lower_text
+
+
+def show_and_tell_desired(text):
+    lower_text = text.lower()
+    return SHOW_AND_TELL_KW in lower_text
+
 
 def get_sentiment_folder(text):
     """
     Analyzes the input text and returns the folder name ("01", "02", "03", or "04")
     based on sentiment and meme mode.
     """
-    global meme_mode_active
-
-    # Check for meme mode activation/deactivation
-    meme_status = check_meme_mode(text)
-
-    # If meme mode is active, override sentiment
-    if meme_mode_active:
+    
+    if forever_desired(text):
+        return FOREVER_FOLDER
+    
+    if meme_desired(text):
         return FOLDER_MEME
+    
+    if show_and_tell_desired(text):
+        return SHOW_AND_TELL_FOLDER
 
     # Perform sentiment analysis
     sentiment = analyzer.polarity_scores(text)

@@ -19,6 +19,5 @@ def play_track(track_num):
     send_cmd(cmd)
 
 if __name__ == "__main__":
-    for track in range(21):
-        play_track(track)
-        time.sleep(10)
+    track = int(input("Which track? "))
+    play_track(track)
