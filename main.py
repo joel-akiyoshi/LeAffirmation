@@ -1,6 +1,9 @@
 import src.microphone as microphone
 import src.vosk_interface as vosk_interface
 import src.sentiment as sentiment
+import src.dfplayer as dfplayer
+import random
+import time
 
 
 audio, stream = microphone.init_microphone()
@@ -14,9 +17,16 @@ try:
 
         result = vosk_interface.transcribe_audio(recognizer, audio_data)
 
-        if result:
+        if result and len(result) > 20:
             print(f"You said {result}")
-            print(f"Sorted into folder {sentiment.get_sentiment_folder(result)}")
+            folder = sentiment.get_sentiment_folder(result)
+            print(f"folder is {folder}")
+            track = random.randint(1, 5) + (folder - 1) * 5
+            print(f"playing track {track}")
+            dfplayer.play_track(track)
+            time.sleep(5)
+            
+
 
 
             

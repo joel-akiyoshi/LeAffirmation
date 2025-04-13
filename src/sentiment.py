@@ -4,10 +4,10 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
 # Folder mappings
-FOLDER_NEGATIVE = "01"
-FOLDER_NEUTRAL = "02"
-FOLDER_POSITIVE = "03"
-FOLDER_MEME = "04"
+FOLDER_NEGATIVE = 1
+FOLDER_NEUTRAL = 2
+FOLDER_POSITIVE = 3
+FOLDER_MEME = 4
 
 # Meme mode keyword triggers
 MEME_MODE_KEYWORDS_ON = ["meme mode on", "turn on meme mode", "activate meme mode", "silly mode activate"]
