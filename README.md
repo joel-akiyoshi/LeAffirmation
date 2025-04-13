@@ -22,7 +22,7 @@ We created this project for fun and to challenge ourselves in a creative way —
 
 ---
 
-### 👥 Team Members
+### Team Members
 
 - **Justin Grino**
 - **Joel Akiyoshi**
